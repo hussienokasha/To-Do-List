@@ -1,0 +1,53 @@
+<div class="container bg-primary-subtle m-auto mt-5 p-4 text-center rounded-3">
+  <div class="d-flex align-items-center justify-content-around">
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="form-floating">
+        <input type="text" class="form-control py-1" id="floatingInput" placeholder="" #ref required>
+        <label for="floatingInput">Task ...</label>
+      </div>
+      <button class="btn btn-primary ms-4" (click)="addToList(ref.value) ; ref.value=''"><i
+          class="bi bi-plus-circle"></i>
+      </button>
+    </div>
+    <h2 class="ms-5">#tasks: {{ArrOfTasks.length}}</h2>
+
+  </div>
+  <hr>
+  <ul class="d-flex justify-content-center align-items-center flex-column gap-2">
+    <li class="text-bg-light rounded  py-1 px-2 w-100 d-flex justify-content-between align-items-center gap-4"
+      *ngFor="let taskinArr of ArrOfTasks; let i = index">
+      <input type="checkbox" (change)="isCompletedFn(taskinArr.id)" [checked]="taskinArr.isCompleted">
+      <span class="bg-body-secondary px-1 py-1 rounded">{{i+1}}</span>
+      <div class="task bg-body-secondary rounded p-1 fs-4 flex-fill"
+        [ngClass]="{'text-decoration-line-through':taskinArr.isCompleted}"> {{taskinArr.data}}</div>
+      <button class="btn border-start " data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i ngClass="bi bi-trash text-danger"></i>
+      </button>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Task!</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Do you really want to delete this task?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger" (click)="delete(taskinArr.id)"
+                data-bs-dismiss="modal">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+
+  </ul>
+
+</div>
+
+
+
+
+<!-- Modal -->
